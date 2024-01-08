@@ -81,9 +81,8 @@ export default class GetSensors extends React.Component {
         
     }
 
-    getDataAndSendOnce = async () => {
-        this.gpsInterval = setInterval(async () => {
-            let { coords } = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
+    async calculateSpeed() {
+        let { coords } = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
             let distance;
             if(coords && this.state.gps.latitude !== undefined) {
                 console.log("=======> Location pas null, location.latitude : " + this.state.gps.latitude);
@@ -102,8 +101,9 @@ export default class GetSensors extends React.Component {
             const speedcalc = distance / timeTaken; // in m/s
             this.setState({ gps: {latitude, longitude, altitude}});
             this.setState({ speed: coords.locations[0].coords.speed});
-        });
+    }
 
+    async updatingSubscription() {
         this.accSubscription = Accelerometer.addListener(accelerometerData => {
             this.setState({ accdata: accelerometerData });
         });
@@ -115,6 +115,14 @@ export default class GetSensors extends React.Component {
         this.baroSubscription = Barometer.addListener(baroData => {
             this.setState({ barodata: baroData });
         });
+    }
+
+    getDataAndSendOnce = async () => {
+        this.gpsInterval = setInterval(async () => {
+            this.calculateSpeed();
+        });
+
+        await this.updatingSubscription();
 
         this.setState({ time: moment().format('MMMM Do YYYY, h:mm:ss a') });
 
@@ -166,17 +174,7 @@ export default class GetSensors extends React.Component {
             
         }, 1000);
 
-        this.accSubscription = Accelerometer.addListener(accelerometerData => {
-            this.setState({ accdata: accelerometerData });
-        });
-
-        this.gyroSubscription = Gyroscope.addListener(gyroData => {
-            this.setState({ gyrodata: gyroData });
-        });
-
-        this.baroSubscription = Barometer.addListener(baroData => {
-            this.setState({ barodata: baroData });
-        });
+        this.updatingSubscription();
 
         this.timeSubscription = setInterval(() => {
             this.setState({ time: moment().format('MMMM Do YYYY, h:mm:ss a') });
