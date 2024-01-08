@@ -42,8 +42,6 @@ export default class GetSensors extends React.Component {
 
     async componentDidMount() {
         const {isPressed, canSend, typeOfConnexion, onIsPressedChange}  = this.props;
-        console.log("In componentDidMount : canSend = " + canSend);
-        console.log("In componentDidMount : typeOfConnexion = " + typeOfConnexion);
         let { coords } = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
         const latitude = coords.latitude;
         const longitude = coords.longitude;
@@ -229,29 +227,9 @@ export default class GetSensors extends React.Component {
         //Here we send the data to the RPi
         if(this.state.typeOfConnexion === "wifi") {
             await this.sendToPiWIFI();
-        /*} else if(typeOfConnexion === "bluetooth") {
-            console.log("In function : Sending data to RPi via bluetooth");
-            this.sendToPiBluetooth(data);*/
-        } else if(this.state.typeOfConnexion === "usb"){
-            console.log("In function : Sending data to RPi via usb");
-            //this.sendToPiUSB();
         }
     };
 
-    /*async sendToPiUSB(){ 
-        const port = new SerialPort('/dev/ttyUSB0', {
-          baudRate: 9600, // Replace with the appropriate baud rate for your Raspberry Pi
-        });
-      
-        // Example: Send the string 'Hello Raspberry Pi' to the serial port
-        port.write('Hello Raspberry Pi', (error) => {
-          if (error) {
-            console.error('Error:', error);
-          } else {
-            console.log('Data sent to Raspberry Pi');
-          }
-        });
-    };*/
 
     async sendToPiWIFI() {
         await SendingDataRpi(mqtt_client, this.state);
@@ -261,10 +239,8 @@ export default class GetSensors extends React.Component {
         //Here we save the data in a local database
         data = this.state;
         try {
-            console.log("In function saveData ===========>>>>>>> Before writeJsonFile, data = ", data);
-            //await writeJsonFile(data);
-            console.log("In componentDidUpdate : After writeJsonFile, on a écrit les données dans le fichier, j: ", j);
-            j++;
+
+            await writeJsonFile(data);
         } catch(error) {
             console.log("In componentDidUpdate : Error while writing in the file : ", error);
         };  
