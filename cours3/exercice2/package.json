@@ -1,8 +1,8 @@
 {
-  "name": "cours3",
+  "name": "exercice2",
   "version": "1.0.0",
   "description": "",
-  "main": "exercice1.js",
+  "main": "bank.js",
   "scripts": {
     "test": "jest"
   },
