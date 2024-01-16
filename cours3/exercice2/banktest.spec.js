@@ -1,5 +1,6 @@
-const getBalance = require("./bank.js");
+const getBalance= require("./bank.js");
 const dao = require("./bankDAO.js");
+const trsf = require("./bankTransfert.js");
 
 const mock_value = 1000000;
 
