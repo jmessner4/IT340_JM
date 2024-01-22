@@ -17,12 +17,12 @@ function savePatient(id, lastName, firstName) {
     patient.firstName = firstName;
     commandDAO.updatePatient(patient);
 
-    const patientList = commandDAO.getPatientByIDList(id);
+    const patientList = commandDAO.getPatientByIDFromList(id);
     patientList.lastName = lastName;
     patientList.firstName = firstName;
     commandDAO.updatePatientList(patientList);
 
-    const patientCache = commandDAO.getPatientByIDCache(id);
+    const patientCache = commandDAO.getPatientByIDFromCache(id);
     patientCache.name = firstName + " " + lastName;
     commandDAO.updatePatientCache(patientCache);
 }

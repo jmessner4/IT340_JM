@@ -32,11 +32,11 @@ function getPatientByID(id) {
     return database.patient[getIndexByID(id, false)];
 }
 
-function getPatientByIDList(id) {
+function getPatientByIDFromList(id) {
     return database.patientList[getIndexByID(id, true)];
 }
 
-function getPatientByIDCache(id) {
+function getPatientByIDFromCache(id) {
     return cache.patientCache[id];
 }
 
@@ -57,4 +57,4 @@ function updatePatientCache({lastName, firstName, ...patient}) {
     console.log(cache);
 }
 
-module.exports = {insertPatient, insertPatientList, insertPatientCache, getPatientByID, getPatientByIDList, getPatientByIDCache, updatePatient, updatePatientList, updatePatientCache};
+module.exports = {insertPatient, insertPatientList, insertPatientCache, getPatientByID, getPatientByIDFromList, getPatientByIDFromCache, updatePatient, updatePatientList, updatePatientCache};
