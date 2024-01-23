@@ -1,0 +1,96 @@
+ <!DOCTYPE html>
+<html lang="en"> 
+  <meta charset="UTF-8">
+  <title>TP GLRT</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- dans html dir="rtl" change le sens de lecture en r vers l -->
+  <style>
+    :root {
+      --text-color: green;
+      --text-contrast: contrast(1);
+      --border-style: 2px solid rgb(177, 80, 104);
+      --padding-grand: 20px;
+      --padding-moyen: 15px;
+      --padding-petit: 10px;
+      --fontsize-grand: 1.5rem;
+      --fontsize-moyen: 1.2rem;
+      --fontsize-petit: 1rem;
+      --margin: 5px;
+
+    }
+  </style>
+
+  <style>
+    /* fichier header.css */
+    /*body {
+      /*writing-mode: vertical-lr; pour les japonais
+    }*/
+    
+    .header {
+      padding: var(--padding-grand);
+      border:  var(--border-style);
+      color: var(--text-color);
+      filter: var(--text-contrast);
+      font-size: clamp(32px, var(--fontsize-grand),80px);
+      margin: var(--margin);
+      inline-size: 50%;
+      block-size: 5rem;
+      animation: font-slide 2s linear  infinite;
+      
+    }
+
+    @keyframes font-slide {
+      from {
+        text-align: start;
+      }
+      
+      50% {
+        text-align: center;
+      }
+      
+      to {
+        text-align: end;
+      }
+    }
+
+    @media (prefers-reduced-motion) {
+      .header {
+      }
+    }
+  </style>
+  
+  <style>
+    /* fichier section.css */
+    
+    .section {
+      padding: var(--padding-moyen);
+      border: 2px solid orange;
+      font-size: var(--fontsize-moyen);
+      margin: var(--margin);
+    }
+  </style>
+  
+  <style>
+    /* fichier footer.css */
+    
+    .footer {
+      padding: var(--padding-petit);
+      border: var(--border-style);
+      color: var(--text-color);
+      filter: var(--text-contrast);
+      font-size: var(--fontsize-petit);
+      margin: var(--margin);
+      text-align: end;
+    }
+  </style>
+
+
+  <body>
+    <div class="header">Ceci est un header</div>
+    
+    <div class="section">Section 1</div>
+    <div class="section">Section 2</div>
+    
+    <div class="footer">Ceci est un footer</div>
+  </body>
+</html> 
